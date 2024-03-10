@@ -1,0 +1,188 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ========== class settings ========== %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% regular class option
+\documentclass{beamer}
+
+% class option for draft mode (quicker typesetting)
+%\documentclass[draft]{beamer}
+
+% class option to print handout with notes
+%\documentclass[handout]{beamer}
+%\usepackage{pgfpages} \pgfpagesuselayout{4 on 1}[a4paper]
+
+% un-comment to see the notes
+%\setbeameroption{show notes}
+
+% theme settings
+\usetheme{CambridgeUS}
+\usecolortheme{dolphin}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ========== packages ========== %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{amsfonts, amsmath, amsthm, amssymb}
+\usepackage{multirow,rotating}
+
+\usepackage{appendixnumberbeamer}
+\usepackage[style=apa, backend=biber, natbib]{biblatex}
+\usepackage{bm}
+\usepackage{hyperref}
+\usepackage{tikz}
+\usetikzlibrary{positioning} % for \AddButton
+\usepackage{etoolbox} % for \AddButton
+\usepackage{xcolor}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ========== setup ========== %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% title info
+\title[]{} % full presentation title in {}; short title in []
+\author[]{} % full name in {}; last name in []
+\institute[NCSU]{North Carolina State University}
+\date[\today]{\today} % default to today
+
+% path to bib file
+\addbibresource{}
+
+% path to graphics folder
+\graphicspath{{}}
+
+% hyperlink settings
+\hypersetup{
+	colorlinks=true,
+	linkcolor=black,
+	filecolor=black,      
+	urlcolor=innovation-blue,
+	citecolor=black
+}
+
+% color definitions -- source: https://brand.ncsu.edu/color/
+\definecolor{wolfpack-red}{RGB}{204,0,0}
+\definecolor{wolfpack-black}{RGB}{0,0,0}
+\definecolor{wolfpack-white}{RGB}{255,255,255}
+\definecolor{reynolds-red}{RGB}{153,0,0}
+\definecolor{genomic-green}{RGB}{111,125,28}
+\definecolor{innovation-blue}{RGB}{66,126,147}
+
+% various color settings
+\setbeamercolor*{palette primary}{bg=wolfpack-black}
+\setbeamercolor*{palette secondary}{bg=wolfpack-white, fg=wolfpack-black}
+\setbeamercolor*{palette tertiary}{bg=reynolds-red, fg=wolfpack-white}
+\setbeamercolor*{titlelike}{fg=wolfpack-red}
+\setbeamercolor*{title}{bg=reynolds-red, fg=wolfpack-white}
+\setbeamercolor*{item}{fg=wolfpack-red}
+\setbeamercolor*{frametitle}{fg=reynolds-red, bg=wolfpack-red!5!wolfpack-white}
+\setbeamercolor*{caption name}{fg=wolfpack-red}
+\setbeamercolor{alerted text}{fg=wolfpack-black}
+\setbeamercolor{alerted text}{bg=innovation-blue}
+\setbeamercolor{block title}{bg=reynolds-red,fg=wolfpack-white}
+\setbeamercolor{block body}{bg=wolfpack-red!5!wolfpack-white}
+\setbeamercolor{button}{bg=reynolds-red,fg=wolfpack-white}
+
+% header and footer color schemes
+\setbeamercolor{section in head/foot}{fg=wolfpack-white, bg=reynolds-red}
+\setbeamercolor{subsection in head/foot}{fg=wolfpack-white, bg=wolfpack-black}
+
+% bibliography color scheme
+\setbeamercolor*{bibliography item}{fg=wolfpack-black}
+\setbeamercolor*{bibliography entry title}{fg=wolfpack-black}
+\setbeamercolor*{bibliography entry author}{fg=wolfpack-black}
+\setbeamercolor*{bibliography entry location}{fg=wolfpack-black}
+\setbeamercolor*{bibliography entry note}{fg=wolfpack-black}
+
+% font settings
+\setbeamerfont{title}{size=\large}
+\setbeamerfont{subtitle}{size=\small}
+\setbeamerfont{author}{size=\small}
+\setbeamerfont{date}{size=\footnotesize}
+\setbeamerfont{institute}{size=\footnotesize}
+
+% remove the buttons at bottom right
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{footline}[frame number]
+
+% remove 'figure' from appearing under figures
+\setbeamertemplate{caption}{\raggedright\insertcaption\par}
+
+% list item settings
+\setbeamertemplate{itemize item}[circle]
+\setbeamertemplate{itemize subitem}[circle]
+\setbeamertemplate{enumerate item}[default]
+\setbeamertemplate{enumerate subitem}[default]
+
+% headline setting
+%BEGIN_FOLD
+\setbeamertemplate{headline}
+{
+	\leavevmode%
+	\hbox{%
+		\begin{beamercolorbox}[wd=.5\paperwidth,ht=2.25ex,dp=1ex,right]{section in head/foot}%
+			\NoHyper \insertauthor,\ \insertshortinstitute \hspace*{2ex} \endNoHyper
+		\end{beamercolorbox}%
+		\begin{beamercolorbox}[wd=.5\paperwidth,ht=2.25ex,dp=1ex,left]{subsection in head/foot}%
+			\hspace*{2ex} \NoHyper \insertshortdate \endNoHyper
+	\end{beamercolorbox}}%
+}
+%END_FOLD
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ========== user-defined commands ========== %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% command to make buttons in bottom right corner of frame
+%BEGIN_FOLD
+\BeforeBeginEnvironment{frame}{\FrameHasButtonfalse}
+\newif\ifFrameHasButton
+\newcommand{\AddButton}[3][]{%
+	\begin{tikzpicture}[remember picture, overlay]
+		\ifFrameHasButton
+		\node[right=0.25em of tmpbutton] (tmpbutton)
+		{\hyperlink{#2}{\beamergotobutton{#3}}};
+		\else
+		\path ([yshift=1em]current page.south west)
+		node[anchor=south west] (tmpbutton)
+		{\hyperlink{#2}{\beamergotobutton{#3}}};
+		\global\FrameHasButtontrue
+		\fi
+	\end{tikzpicture}%
+}
+%END_FOLD
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ========== presentation ========== %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	% ---------- title slide ---------- %
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\frame[plain, noframenumbering]{\titlepage}
+	
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	% ---------- body slides ------------ % 
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\begin{frame}
+		content
+	\end{frame}
+	
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	% ---------- references ---------- %
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\appendix
+	\begin{frame}[allowframebreaks]{References}
+		\printbibliography
+	\end{frame}
+	
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	% ---------- appendix ---------- %
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\begin{frame}
+		content
+	\end{frame}
+	
+\end{document}
