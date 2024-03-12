@@ -115,7 +115,6 @@
 \setbeamertemplate{enumerate subitem}[default]
 
 % headline setting
-%BEGIN_FOLD
 \setbeamertemplate{headline}
 {
 	\leavevmode%
@@ -127,15 +126,12 @@
 			\hspace*{2ex} \NoHyper \insertshortdate \endNoHyper
 	\end{beamercolorbox}}%
 }
-%END_FOLD
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % ========== user-defined commands ========== %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % command to make buttons in bottom right corner of frame
-%BEGIN_FOLD
 \BeforeBeginEnvironment{frame}{\FrameHasButtonfalse}
 \newif\ifFrameHasButton
 \newcommand{\AddButton}[3][]{%
@@ -151,7 +147,6 @@
 		\fi
 	\end{tikzpicture}%
 }
-%END_FOLD
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % ========== presentation ========== %
